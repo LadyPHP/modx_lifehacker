@@ -6,22 +6,22 @@
 
 // массив пакетов для установки
 $listPackagesToInstall = array(
-    1 => array( // standart modx provider
-          'sdStore'
-        , 'Ace'
-        , 'AdminTools'
-        , 'Collections'
-        , 'MIGX'
-        , 'pdoTools'
-        , 'pThumb'
-        , 'VersionX'
-        , 'translit'
-        , 'TinyMCE'
-        , 'FormIt'
-    ),
-    2 => array( // other providers
-         'Tickets'
-    )
+    1 => [ // пакеты от стандартного провайдера
+        'sdStore',
+        'Ace',
+        'AdminTools',
+        'Collections',
+        'MIGX',
+        'pdoTools',
+        'pThumb',
+        'VersionX',
+        'translit',
+        'TinyMCE',
+        'FormIt',
+    ],
+    2 => [ // прочие пакеты
+         'Tickets',
+    ]
 );
 
 define('MODX_API_MODE', true);
@@ -91,13 +91,13 @@ foreach ($listPackagesToInstall as $providerId => $installPackages) {
                         $package = $modx->newObject('transport.modTransportPackage');
                         $package->set('signature', $foundPackage->signature);
                         $package->fromArray(array(
-                            'created' => date('Y-m-d h:i:s'),
-                            'updated' => null,
-                            'state' => 1,
-                            'workspace' => 1,
-                            'provider' => $providerId,
-                            'source' => $foundPackage->signature . '.transport.zip',
-                            'package_name' => $sig[0],
+                            'created'       =>  date('Y-m-d h:i:s'),
+                            'updated'       =>  null,
+                            'state'         =>  1,
+                            'workspace'     =>  1,
+                            'provider'      => $providerId,
+                            'source'        => $foundPackage->signature . '.transport.zip',
+                            'package_name'  => $sig[0],
                             'version_major' => $versionSignature[0],
                             'version_minor' => !empty($versionSignature[1]) ? $versionSignature[1] : 0,
                             'version_patch' => !empty($versionSignature[2]) ? $versionSignature[2] : 0,
@@ -125,9 +125,7 @@ foreach ($listPackagesToInstall as $providerId => $installPackages) {
                         break;
                     }
                 }
-            } else {
-                echo 'Package ' . $packageName . ' not found' . "\n";
-            }
+            } else echo 'Package ' . $packageName . ' not found' . "\n";
         }
     }
 }
